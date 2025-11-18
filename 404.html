@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecting...</title>
+    <script>
+        // Capture the token from the URL and redirect to main page
+        const hashParams = new URLSearchParams(window.location.hash.substring(1));
+        const accessToken = hashParams.get('access_token');
+        const redirectUrl = 'https://tbacher85.github.io/taberna-latina-alpha/';
+        
+        if (accessToken) {
+            // Redirect to main page with token preserved
+            window.location.href = redirectUrl + '#' + window.location.hash;
+        } else {
+            window.location.href = redirectUrl;
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecting to Taberna...</p>
+</body>
+</html>
