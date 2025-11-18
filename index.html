@@ -806,7 +806,7 @@
             const { error } = await supabase.auth.signInWithOtp({
                 email: email,
                 options: {
-                    emailRedirectTo: window.location.origin,
+                    emailRedirectTo: 'https://tbacher85.github.io/taberna-latina-alpha/',
                 },
             });
             
