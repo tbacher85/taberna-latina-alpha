@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redirecting...</title>
+    <title>Taberna - Redirecting</title>
     <script>
-        // Capture the token from the URL and redirect to main page
-        const hashParams = new URLSearchParams(window.location.hash.substring(1));
-        const accessToken = hashParams.get('access_token');
-        const redirectUrl = 'https://tbacher85.github.io/taberna-latina-alpha/';
+        // Handle Supabase auth callback
+        function handleAuthCallback() {
+            const hash = window.location.hash;
+            if (hash && hash.includes('access_token')) {
+                // This is a Supabase auth callback - redirect to main app
+                const mainAppUrl = 'https://tbacher85.github.io/taberna-latina-alpha/';
+                window.location.href = mainAppUrl + hash;
+            } else {
+                // Regular 404 - go to main page
+                window.location.href = 'https://tbacher85.github.io/taberna-latina-alpha/';
+            }
+        }
+        
+        // Handle both hash and query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const accessToken = urlParams.get('access_token');
         
         if (accessToken) {
-            // Redirect to main page with token preserved
-            window.location.href = redirectUrl + '#' + window.location.hash;
+            // Token in query parameters (older format)
+            window.location.href = 'https://tbacher85.github.io/taberna-latina-alpha/#access_token=' + accessToken;
         } else {
-            window.location.href = redirectUrl;
+            // Check hash or redirect to main page
+            handleAuthCallback();
         }
     </script>
 </head>
